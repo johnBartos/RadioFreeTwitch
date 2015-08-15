@@ -45,7 +45,7 @@ exports.get = function(req,res) {
     var options = make_access_token_options(req);
     return rp(options)
       .then(function (token) {
-        console.log(token);
+        //console.log(token);
         token.name = req.params.name;
         return token;
       })
@@ -62,10 +62,12 @@ exports.get = function(req,res) {
       var options = make_stream_options(access_token);
       return rp(options)
       .then(function (body) {
-        res.status(200).json({
+        var bd = {
           success: true,
-          body: body
-        });
+          body: JSON.stringify(body)
+        };
+        console.log(JSON.parse(bd.body));
+        res.status(200).json(bd);
       })
       .catch(function (reason) {
         console.log(reason);
