@@ -11,6 +11,13 @@ function parseBody(body)
   };
 }
 
+function streamTransform (body)
+{
+  var lines = body.split('\n');
+  var audio_stream = [lines[17], lines[18], lines[19]].join('\n');
+  return audio_stream;
+}
+
 function make_access_token_options(req)
 {
    return {
@@ -21,12 +28,13 @@ function make_access_token_options(req)
    };
 }
 
-function make_usher_options(access_token)
+function make_stream_options(access_token)
 {
   return {
     uri: 'http://usher.twitch.tv/api/channel/hls/' + access_token.name + '.m3u8?player=twitchweb&&token='+  access_token.token + '&sig=' + access_token.sig + '&allow_audio_only=true&allow_source=true&type=any&p={123456}',
     method: 'GET',
-    headers: {'user-agent': 'node.js'}
+    headers: {'user-agent': 'node.js'},
+    transform: streamTransform
   };
 }
 
@@ -43,20 +51,31 @@ exports.get = function(req,res) {
       })
       .catch(function (reason) {
         console.log(reason);
+        res.status(400).json({
+          success: false,
+          reason: reason
+        });
       });
     }
 
-    var sendUsherRequest = function (access_token) {
-      var options = make_usher_options(access_token);
+    var sendStreamRequest = function (access_token) {
+      var options = make_stream_options(access_token);
       return rp(options)
       .then(function (body) {
-        res.json(body);
+        res.status(200).json({
+          success: true,
+          body: body
+        });
       })
       .catch(function (reason) {
-        res.json(reason);
+        console.log(reason);
+        res.status(400).json({
+          success: false,
+          reason: reason
+        });
       });
     }
 
     loadAccessToken(req)
-    .then(sendUsherRequest);
+    .then(sendStreamRequest);
 };
