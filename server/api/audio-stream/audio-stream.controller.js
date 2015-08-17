@@ -14,7 +14,7 @@ function parseBody(body)
 function streamTransform (body)
 {
   var lines = body.split('\n');
-  var audio_stream = [lines[17], lines[18], lines[19]].join('\n');
+  var audio_stream = [lines[0], lines[17], lines[18], lines[19]].join('\n');
   return audio_stream;
 }
 
@@ -67,6 +67,7 @@ exports.get = function(req,res) {
           body: JSON.stringify(body)
         };
         console.log(JSON.parse(bd.body));
+        //res.status(200).send(JSON.parse(bd.body));
         res.status(200).json(bd);
       })
       .catch(function (reason) {
