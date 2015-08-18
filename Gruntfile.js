@@ -67,7 +67,8 @@ module.exports = function(grunt) {
         },
         files: {
           'client/index.html': [
-          'client/{app,components}/**/*.css'
+          'client/{app,components}/**/*.css',
+          '!client/app.css'
           ]
         }
       }
