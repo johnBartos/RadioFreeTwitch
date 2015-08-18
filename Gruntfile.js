@@ -78,7 +78,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-injector');
 
-  grunt.registerTask('build', ['clean', 'injector']);
+  grunt.registerTask('build', ['injector']);
 
 
   grunt.registerTask('serve', function () {
