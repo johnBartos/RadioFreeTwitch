@@ -10,6 +10,6 @@ require('./routes.js')(app);
 require('./config/express')(app);
 
 app.listen(config.port);
-console.log('Listening on ' + config.port + '...');
+console.log('Listening on ' + config.port + ' in ' + app.get('env') + ' mode...');
 
 exports = module.exports = app;
