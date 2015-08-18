@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('radioFreeTiwtch')
+angular.module('radioFreeTwitch')
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
   $urlRouterProvider
     .otherwise('/');
