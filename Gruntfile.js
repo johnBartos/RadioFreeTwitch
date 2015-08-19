@@ -45,10 +45,10 @@ module.exports = function(grunt) {
         files: {
           'client/index.html': [
             [
-            '{.tmp,}/{app,components}/**/*.js',
-            '!{.tmp,}/app/app.js',
-            '!{.tmp,}/{app,components}/**/*.spec.js',
-            '!{.tmp,}/{app,components}/**/*.mock.js'
+            'client/{app,components}/**/*.js',
+            '!client/app/app.js',
+            '!client/{app,components}/**/*.spec.js',
+            '!client/{app,components}/**/*.mock.js'
             ]
           ]
         }
