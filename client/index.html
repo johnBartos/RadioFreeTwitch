@@ -24,10 +24,6 @@
   </head>
   <body ng-app="radioFreeTwitch">
 
-    <!--[if lt IE 7]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
     <div ui-view=""></div>
 
     <script>
@@ -40,11 +36,13 @@
       ga('send', 'pageview');
     </script>
 
-    <!--[if lt IE 9]>
-    <![endif]-->
-
     <!-- build:js({client,node_modules}) app/vendor.js -->
     <!-- endbuild -->
+    <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
+
+    <script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script type="text/javascript" src="../node_modules/angular-resource/angular-resource.min.js"></script>
 
     <!-- build:js({.tmp,client}) app/app.js -->
       <script src="app/app.js"></script>
