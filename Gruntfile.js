@@ -73,13 +73,22 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    browserify: {
+        dist: {
+          files: {
+            'client/bundle.js': ['client/app/**/*.js']
+          }
+        }
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-injector');
+  grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('build', ['clean:dist', 'injector']);
+  grunt.registerTask('build', ['clean:dist', 'browserify:dist']);
 
 
   grunt.registerTask('serve', function () {
