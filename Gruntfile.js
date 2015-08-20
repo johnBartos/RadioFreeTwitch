@@ -45,10 +45,7 @@ module.exports = function(grunt) {
         files: {
           'client/index.html': [
             [
-            'client/{app,components}/**/*.js',
-            '!client/app/app.js',
-            '!client/{app,components}/**/*.spec.js',
-            '!client/{app,components}/**/*.mock.js'
+            'client/bundle.js'
             ]
           ]
         }
@@ -88,7 +85,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-injector');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('build', ['clean:dist', 'browserify:dist']);
+  grunt.registerTask('build', ['clean:dist', 'browserify:dist', 'injector']);
 
 
   grunt.registerTask('serve', function () {
