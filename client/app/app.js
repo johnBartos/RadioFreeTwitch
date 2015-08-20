@@ -1,9 +1,15 @@
 'use strict'
 
-angular.module('radioFreeTwitch')
-.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-  $urlRouterProvider
-    .otherwise('/');
+var angular = require('angular');
 
-  $locationProvider.html5Mode(true);
-});
+angular.module('radioFreeTwitch', [
+require('angular-resource'),
+require('angular-ui-router')
+])
+  .config( function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    $urlRouterProvider
+      .otherwise('/');
+
+    $locationProvider.html5Mode(true);
+  }
+);

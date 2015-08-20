@@ -6,8 +6,8 @@ var express = require('express');
 var config = require('./config/environment');
 var app = express();
 
-require('./routes.js')(app);
 require('./config/express')(app);
+require('./routes.js')(app);
 
 app.listen(config.port);
 console.log('Listening on ' + config.port + ' in ' + app.get('env') + ' mode...');

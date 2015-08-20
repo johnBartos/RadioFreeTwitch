@@ -45,10 +45,10 @@ module.exports = function(grunt) {
         files: {
           'client/index.html': [
             [
-            '{.tmp,client}/{app,components}/**/*.js',
-            '!{.tmp,client}/app/app.js',
-            '!{.tmp,client}/{app,components}/**/*.spec.js',
-            '!{.tmp,client}/{app,components}/**/*.mock.js'
+            'client/{app,components}/**/*.js',
+            '!client/app/app.js',
+            '!client/{app,components}/**/*.spec.js',
+            '!client/{app,components}/**/*.mock.js'
             ]
           ]
         }
@@ -73,13 +73,22 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    browserify: {
+        dist: {
+          files: {
+            'client/bundle.js': ['client/app/**/*.js']
+          }
+        }
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-injector');
+  grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('build', ['clean:dist', 'injector']);
+  grunt.registerTask('build', ['clean:dist', 'browserify:dist']);
 
 
   grunt.registerTask('serve', function () {
