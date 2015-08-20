@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'client/app/*.js',
+        src: 'client/bundle.js',
         dest: 'build/<%= pkg.name %>.min.js'
       }
     },
@@ -19,13 +19,10 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-          '.tmp',
-          'build/*',
-          '!/.git*'
+          'client/bundle.js',
           ]
         }]
       },
-      server: '.tmp'
     },
 
     injector: {
@@ -74,7 +71,10 @@ module.exports = function(grunt) {
     browserify: {
         dist: {
           files: {
-            'client/bundle.js': ['client/app/**/*.js']
+            'client/bundle.js': [
+              'client/app/**/*.js',
+              'node_modules/bootstrap/dist/js/bootstrap.min.js'
+            ],
           }
         }
     },
