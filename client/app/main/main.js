@@ -3,7 +3,7 @@ angular.module('radioFreeTwitch')
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'main.html',
+        templateUrl: 'app/main/main.html',
         controller: 'MainController'
       });
   });

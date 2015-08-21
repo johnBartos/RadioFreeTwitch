@@ -61,8 +61,7 @@ module.exports = function(grunt) {
         },
         files: {
           'client/index.html': [
-          'client/{app,components}/**/*.css',
-          '!client/app.css'
+            'client/bundle.css'
           ]
         }
       }
@@ -72,20 +71,35 @@ module.exports = function(grunt) {
         dist: {
           files: {
             'client/bundle.js': [
-              'client/app/**/*.js',
-              'node_modules/bootstrap/dist/js/bootstrap.min.js'
+              'client/app/**/*.js'
             ],
           }
         }
     },
+
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'client/bundle.css': [
+            'node_modules/bootstrap/dist/css/bootstrap.min.css'
+          ]
+        }
+      }
+},
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-injector');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('build', ['clean:dist', 'browserify:dist', 'injector']);
+  grunt.registerTask('build', ['clean:dist', 'browserify:dist', 'cssmin', 'injector']);
 
 
   grunt.registerTask('serve', function () {
