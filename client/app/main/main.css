@@ -1,4 +1,8 @@
-.btn {
-  background-color: green;
-  color: red;
+.title {
+  color: white;
+  background-color: #4DBE93;
+}
+
+.centered{
+  text-align: center;
 }

@@ -1,0 +1,12 @@
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: 'Lobster', cursive;
+  color: #000;
+  background-color: #F89406;
+  margin-bottom: 50px;
+}

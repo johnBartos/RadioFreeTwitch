@@ -61,7 +61,8 @@ module.exports = function(grunt) {
         },
         files: {
           'client/index.html': [
-            'client/bundle.css'
+            'client/bundle.css',
+            'client/app/app.css'
           ]
         }
       }
