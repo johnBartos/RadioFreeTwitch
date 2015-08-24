@@ -66,7 +66,7 @@ exports.get = function(req,res) {
           success: true,
           body: JSON.stringify(body)
         };
-        console.log(JSON.parse(bd.body));
+        //console.log(JSON.parse(bd.body));
         //res.status(200).send(JSON.parse(bd.body));
         res.status(200).json(bd);
       })

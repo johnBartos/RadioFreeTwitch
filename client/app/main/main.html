@@ -9,9 +9,9 @@
     <div class="col-md-12 centered">
       <div class="input-group input-group-lg">
           <div class="input-group-addon" id="sizing-addon1">http://twitch.tv/</div>
-          <input type="text" class="form-control" placeholder="streamer" aria-describedby="sizing-addon1">
+          <input type="text" class="form-control" placeholder="streamer" aria-describedby="sizing-addon1" ng-model="streamer">
           <div class = "input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
+            <button class="btn btn-default" type="button" ng-click="doSomething()">Go!</button>
           </div>
       </div>
     </div>
