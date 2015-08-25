@@ -10,7 +10,7 @@ angular.module('radioFreeTwitch')
       console.log($scope.streamer);
       $http.get('api/audio-stream/' + $scope.streamer)
         .then(function(result) {
-            $scope.stream = result.data.body;
+            $scope.stream = JSON.parse(result.data.body);
             $scope.isCollapsed = false;
             console.log(result);
         }, function(error){
