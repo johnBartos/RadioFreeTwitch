@@ -8,10 +8,20 @@
   <div class="row">
     <div class="col-md-12 centered">
       <div class="input-group input-group-lg">
-          <div class="input-group-addon" id="sizing-addon1">http://twitch.tv/</div>
+          <div class="input-group-addon" id="sizing-addon1">https://twitch.tv/</div>
           <input type="text" class="form-control" placeholder="streamer" aria-describedby="sizing-addon1" ng-model="streamer">
           <div class = "input-group-btn">
-            <button class="btn btn-default" type="button" ng-click="doSomething()">Go!</button>
+            <button class="btn btn-default" type="button" ng-click="getStream()">Go!</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+      <div class="stream" collapse="isCollapsed">
+          <div class="well well-lg">
+            <textarea ng-model="stream">
+            </textarea>
           </div>
       </div>
     </div>
