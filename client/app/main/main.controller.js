@@ -1,6 +1,7 @@
 angular.module('radioFreeTwitch')
-  .controller('MainController', function($scope, $http) {
+  .controller('MainController', function($scope, $http, streamService) {
 
+    streamService.setup(angular.element(document.getElementById('player')))
     $scope.isCollapsed = true;
 
     $scope.streamer = "";

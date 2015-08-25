@@ -13,8 +13,8 @@
 
     <!-- build:css(client) app/vendor.css -->
     <!-- endbuild -->
-    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet" type="text/css">
     <!-- build:css({.tmp,client}) app/app.css -->
       <!-- injector:css -->
       <link rel="stylesheet" href="bundle.css">
@@ -23,9 +23,9 @@
     <!-- endbuild -->
 
   <!-- flowplayer -->
-  <link rel="stylesheet" href="//releases.flowplayer.org/6.0.3/skin/minimalist.css">
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src="//releases.flowplayer.org/6.0.3/flowplayer.min.js"></script>
+  <link rel="stylesheet" href="http://releases.flowplayer.org/6.0.3/skin/minimalist.css">
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="http://releases.flowplayer.org/6.0.3/flowplayer.min.js"></script>
 
   </head>
   <body ng-app="radioFreeTwitch">
@@ -42,9 +42,11 @@
       ga('send', 'pageview');
     </script>
 
+
     <!-- injector:js -->
     <script src="bundle.js"></script>
     <!-- endinjector -->
+    <script src="components/stream-service/stream-service.js"></script>
 
   </body>
 </html>
