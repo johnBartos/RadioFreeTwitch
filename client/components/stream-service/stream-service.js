@@ -2,7 +2,7 @@ angular.module('radioFreeTwitch')
 .service('streamService', function () {
 
   this.setup = function(container, stream) {
-    flowplayer(container, {
+    flowplayer(container, '../components/flowplayer/flowplayer-3.2.13.swf', {
       clip: {
         live: true,
         sources: [
