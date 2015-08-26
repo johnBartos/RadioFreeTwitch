@@ -2,17 +2,18 @@ angular.module('radioFreeTwitch')
 .service('streamService', function () {
 
   this.setup = function(container, stream) {
-    flowplayer(container, '../components/flowplayer/flowplayer-3.2.13.swf', {
+    flowplayer(container, {
       clip: {
         live: true,
         sources: [
           {
-            type: 'video/webm',
-            src: 'http://stream.flowplayer.org/drive.webm'
+            type: 'application/x-mpegurl',
+            src: 'http://srv6.zoeweb.tv:1935/z330-live/stream/playlist.m3u8'
           }
         ]
       },
       debug: true,
+      swf: '../components/flowplayer/flowplayer-3.2.13.swf'
     });
   }
 });
