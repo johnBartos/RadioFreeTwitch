@@ -30,7 +30,6 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-cssmin": "^0.13.0",
     "grunt-contrib-uglify": "^0.9.1",
-    "grunt-injector": "^0.6.0",
-    "q-io": "^1.13.1"
+    "grunt-injector": "^0.6.0"
   }
 }
