@@ -3,12 +3,18 @@ angular.module('radioFreeTwitch')
 
   this.setup = function(container, stream) {
     flowplayer(container, {
+      plugins : {
+        rtmp: {
+           url: "http://releases.flowplayer.org/swf/flowplayer.rtmp-3.2.13.swf",
+           failOverDelay: 4000
+        }
+    },
       clip: {
         live: true,
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: 'http://localhost:3030/api/audio-stream/therealhandi'
+            src: stream
           }
         ]
       },

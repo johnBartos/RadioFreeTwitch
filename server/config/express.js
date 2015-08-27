@@ -5,8 +5,9 @@ var config = require('./environment');
 var path = require('path');
 
 module.exports = function(app){
-  console.log(path.join(config.root, 'node_modules'));
-  app.use(express.static(path.join(config.root, 'node_modules')));
   app.use(express.static(path.join(config.root, 'client')));
-  app.set('appPath', '../client');
+  // app.set('appPath', '../client');
+  console.log(path.join(config.root, 'client'));
+  app.set('appPath', path.join(config.root, 'client'));
+
 };
