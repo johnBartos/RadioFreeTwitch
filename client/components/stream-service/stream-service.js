@@ -8,7 +8,7 @@ angular.module('radioFreeTwitch')
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: 'http://srv6.zoeweb.tv:1935/z330-live/stream/playlist.m3u8'
+            src: 'http://localhost:3030/api/audio-stream/therealhandi'
           }
         ]
       },
