@@ -2,6 +2,8 @@
 
 var rp = require('request-promise');
 
+var fs = require('q-io/fs-mock');
+
 function parseBody(body)
 {
   var parsedBody = JSON.parse(body);
@@ -62,13 +64,9 @@ exports.get = function(req,res) {
       var options = make_stream_options(access_token);
       return rp(options)
       .then(function (body) {
-        var bd = {
-          success: true,
-          body: JSON.stringify(body)
-        };
-        //console.log(JSON.parse(bd.body));
-        //res.status(200).send(JSON.parse(bd.body));
-        res.status(200).json(bd);
+        res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
+        res.setHeader('Content-Disposition', 'attachment; filename=stream.m38u');
+        res.status(200).send(body);
       })
       .catch(function (reason) {
         console.log(reason);
