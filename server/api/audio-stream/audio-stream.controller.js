@@ -13,10 +13,10 @@ function parseBody(body)
 
 function streamTransform (body)
 {
-  return body;
   var lines = body.split('\n');
-  // var audio_stream = [lines[0], lines[17], lines[18], lines[19]].join('\n');
-  return lines[19];
+  var audio_stream = [lines[0], lines[17], lines[18], lines[19]].join('\n');
+  //return lines[19];
+  return audio_stream;
 }
 
 function make_access_token_options(req)
@@ -32,10 +32,19 @@ function make_access_token_options(req)
 function make_stream_options(access_token)
 {
   return {
-    uri: 'http://usher.twitch.tv/api/channel/hls/' + access_token.name + '.m3u8?player=twitchweb&&token='+  access_token.token + '&sig=' + access_token.sig + '&allow_audio_only=true&allow_source=true&type=any&p={123456}',
+  uri: 'http://usher.twitch.tv/api/channel/hls/' + access_token.name + '.m3u8?player=twitchweb&&token='+  access_token.token + '&sig=' + access_token.sig +'&allow_audio_only=true&allow_source=true&type=any&p={123456}',
     method: 'GET',
     headers: {'user-agent': 'node.js'},
     transform: streamTransform
+  };
+}
+
+function streamFragmentOptions(hlsUri)
+{
+  return {
+    uri: hlsUri,
+    method: 'GET',
+    headers: {'user-agent': 'node.js'}
   };
 }
 
@@ -43,6 +52,7 @@ exports.get = function(req,res) {
   console.log('Getting access token');
 
   var loadAccessToken = function (req) {
+    console.log('loadAccessToken');
     var options = make_access_token_options(req);
     return rp(options)
       .then(function (token) {
@@ -60,12 +70,14 @@ exports.get = function(req,res) {
     }
 
     var sendStreamRequest = function (access_token) {
+      console.log('sendStreamRequest');
       var options = make_stream_options(access_token);
       return rp(options)
       .then(function (body) {
         res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
         res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
         res.status(200).send(body);
+        return body;
       })
       .catch(function (reason) {
         console.log(reason);
@@ -76,6 +88,25 @@ exports.get = function(req,res) {
       });
     }
 
+    var getStreamFragments = function (hlsUrl) {
+      console.log('getStreamFragments')
+      var options = streamFragmentOptions(hlsUrl);
+      return rp(options)
+      .then( function (body) {
+        res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
+        // res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
+        res.status(200).send(body);
+      })
+      .catch( function (reason) {
+        console.log(reason);
+        res.status(400).json({
+          success: false,
+          reason: reason
+        });
+      });
+    }
+
     loadAccessToken(req)
     .then(sendStreamRequest);
+    //.then(getStreamFragments);
 };
