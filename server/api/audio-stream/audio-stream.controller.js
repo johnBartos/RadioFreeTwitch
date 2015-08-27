@@ -14,9 +14,10 @@ function parseBody(body)
 function streamTransform (body)
 {
   var lines = body.split('\n');
-  var audio_stream = [lines[0], lines[17], lines[18], lines[19]].join('\n');
-  //return lines[19];
-  return audio_stream;
+  // var audio_stream = [lines[0], lines[17], lines[18], lines[19]].join('\n');
+  // console.log(lines[19]);
+  return lines[19];
+  // return audio_stream;
 }
 
 function make_access_token_options(req)
@@ -74,10 +75,10 @@ exports.get = function(req,res) {
       var options = make_stream_options(access_token);
       return rp(options)
       .then(function (body) {
-        res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
-        res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
-        res.status(200).send(body);
-        return body;
+        // res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
+        // res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
+        // res.status(200).send(body);
+       return body;
       })
       .catch(function (reason) {
         console.log(reason);
@@ -107,6 +108,6 @@ exports.get = function(req,res) {
     }
 
     loadAccessToken(req)
-    .then(sendStreamRequest);
-    //.then(getStreamFragments);
+    .then(sendStreamRequest)
+    .then(getStreamFragments);
 };
