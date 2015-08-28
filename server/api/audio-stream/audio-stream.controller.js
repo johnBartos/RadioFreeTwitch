@@ -2,8 +2,7 @@
 
 var rp = require('request-promise');
 
-function parseBody(body)
-{
+function parseBody (body) {
   var parsedBody = JSON.parse(body);
   return {
     token : parsedBody.token,
@@ -11,14 +10,27 @@ function parseBody(body)
   };
 }
 
-function streamTransform (body)
-{
+function streamTransform (body) {
   var lines = body.split('\n');
   // var audio_stream = [lines[0], lines[17], lines[18], lines[19]].join('\n');
   // console.log(lines[19]);
   return lines[19];
-  // return audio_stream;
+  //return audio_stream;
 }
+
+function makeChunkAbsoluteUriTransform (body) {
+  var chunks  = body.split('\n')
+    .filter( function (chunk) {
+      if(chunk.charAt(0) === '#') {
+        return false;
+      }
+      else {
+        return true;
+      }
+  });
+  return chunks.join('\n');
+}
+
 
 function make_access_token_options(req)
 {
@@ -78,7 +90,7 @@ exports.get = function(req,res) {
         // res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
         // res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
         // res.status(200).send(body);
-       return body;
+        return body;
       })
       .catch(function (reason) {
         console.log(reason);
@@ -89,13 +101,23 @@ exports.get = function(req,res) {
       });
     }
 
-    var getStreamFragments = function (hlsUrl) {
+    var getStreamFragments = function (hlsUri) {
       console.log('getStreamFragments')
-      var options = streamFragmentOptions(hlsUrl);
+      var options = streamFragmentOptions(hlsUri);
+
       return rp(options)
       .then( function (body) {
+        var host = hlsUri.substring(0, hlsUri.indexOf('py-index-live.m3u8'));
+        body = body.split('\n').map(function(a) {
+          if(a.charAt(0) != '#'){
+           return host + a;
+         }
+         else {
+           return a;
+         }
+         }).join("\n");
         res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
-        // res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
+        res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
         res.status(200).send(body);
       })
       .catch( function (reason) {
@@ -106,6 +128,7 @@ exports.get = function(req,res) {
         });
       });
     }
+
 
     loadAccessToken(req)
     .then(sendStreamRequest)
