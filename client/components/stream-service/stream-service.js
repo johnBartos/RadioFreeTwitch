@@ -14,7 +14,7 @@ angular.module('radioFreeTwitch')
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: 'http://localhost/api/audio-stream/pax.m3u8'
+            src: 'http://localhost/api/audio-stream/' + stream + '.m3u8'
           }
         ]
       },
