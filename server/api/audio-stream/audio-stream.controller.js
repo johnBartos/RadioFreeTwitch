@@ -67,7 +67,7 @@ exports.get = function(req,res) {
         res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
         res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
         //res.status(200).send(body);
-        res.status(200).send('#EXTM3U' + '\n' + 'api/stream-chunks/' + encodeURIComponent(body));
+        res.status(200).send('api/stream-chunks/' + encodeURIComponent(body));
       })
       .catch(function (reason) {
         console.log(reason);
