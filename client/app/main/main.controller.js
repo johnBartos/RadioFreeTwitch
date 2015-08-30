@@ -11,21 +11,11 @@ angular.module('radioFreeTwitch')
 
       var stream = $http.get('api/audio-stream/' + $scope.streamer)
         .then(function(result) {
-            console.log(result.data);
-            return result.data;
-            // $scope.isCollapsed = false;
-            // streamService.setup(angular.element(document.getElementById('player')), $scope.streamer);
+            console.log('proxy url is' + result.data);
+            $scope.isCollapsed = false;
+            streamService.setup(angular.element(document.getElementById('player')), result.data);
         }, function(error) {
             console.log('ERROR ' + error);
         });
-
-      var chunks = $http.get('api/stream-chunks/' + stream)
-        .then( function(result) {
-          console.log(result);
-        }, function(error) {
-          console.log('ERROR ' + error);
-        });
-
-
-      }
+    }
   });

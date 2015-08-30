@@ -22,6 +22,7 @@ function getAccessTokenOptions(req)
 }
 
 function parseStream (body) {
+//  return body;
   var lines = body.split('\n');
   return lines[19];
 }
@@ -65,7 +66,8 @@ exports.get = function(req,res) {
         console.log(body);
         res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
         res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
-        res.status(200).send(encodeURIComponent(body));
+        //res.status(200).send(body);
+        res.status(200).send('#EXTM3U' + '\n' + 'api/stream-chunks/' + encodeURIComponent(body));
       })
       .catch(function (reason) {
         console.log(reason);

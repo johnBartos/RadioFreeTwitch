@@ -2,6 +2,7 @@ angular.module('radioFreeTwitch')
 .service('streamService', function () {
 
   this.setup = function(container, stream) {
+    console.log('stream is ' + stream);
     flowplayer(container, {
       plugins: {
         rtmp: {
@@ -14,7 +15,7 @@ angular.module('radioFreeTwitch')
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: 'http://localhost/api/audio-stream/' + stream + '.m3u8'
+            src: encodeURIComponent(stream)
           }
         ]
       },

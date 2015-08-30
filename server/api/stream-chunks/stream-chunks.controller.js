@@ -25,9 +25,11 @@ function getChunksOptions (stream) {
 
 exports.get = function(req, res) {
   console.log('getting stream chunks');
-
-  var stream = decodeURIComponent(req.query.stream);
+  console.log(req.params.stream);
+  var stream = decodeURIComponent(req.params.stream);
   var server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
+
+  console.log(server + stream);
 
   var getChunks = function (stream) {
     var options = getChunksOptions(stream);
