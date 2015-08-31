@@ -22,10 +22,14 @@ function getAccessTokenOptions(req)
 }
 
 function parseStream (body) {
+  console.log('pre-split-body ' + body);
 //  return body;
   var lines = body.split('\n');
-  return lines[19];
+  var stream = lines[lines.length-2];
+
+  return 'api/stream-chunks/' + encodeURIComponent(stream);
 }
+
 
 function getStreamOptions(access_token)
 {
@@ -61,13 +65,20 @@ exports.get = function(req,res) {
     var getStream = function (access_token) {
       console.log('sendStreamRequest');
       var options = getStreamOptions(access_token);
+      console.log(options.uri);
       return rp(options)
       .then(function (body) {
         console.log(body);
+
+        if(typeof body == 'undefined') {
+          res.status(400).json({
+            success: false,
+            reason: 'Stream was undefined'
+          });
+          return;
+        }
         res.setHeader('Content-type', 'application/vnd.apple.mpegurl');
-        res.setHeader('Content-Disposition', 'attachment; filename=stream.m3u8');
-        //res.status(200).send(body);
-        res.status(200).send('api/stream-chunks/' + encodeURIComponent(body));
+        res.status(200).send(body);
       })
       .catch(function (reason) {
         console.log(reason);
