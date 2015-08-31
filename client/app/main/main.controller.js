@@ -9,7 +9,7 @@ angular.module('radioFreeTwitch')
     $scope.getStream = function() {
       console.log($scope.streamer);
 
-      var stream = $http.get('api/audio-stream/' + $scope.streamer)
+      var stream = $http.get('api/audio-stream/' + $scope.streamer + '.m3u8')
         .then(function(result) {
             console.log('proxy url is' + result.data);
             $scope.isCollapsed = false;

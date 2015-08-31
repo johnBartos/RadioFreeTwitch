@@ -23,7 +23,6 @@ function getAccessTokenOptions(req)
 
 function parseStream (body) {
   console.log('pre-split-body ' + body);
-//  return body;
   var lines = body.split('\n');
   var stream = lines[lines.length-2];
 
@@ -88,6 +87,8 @@ exports.get = function(req,res) {
         });
       });
     }
+
+
 
     getAccessToken(req)
     .then(getStream);
