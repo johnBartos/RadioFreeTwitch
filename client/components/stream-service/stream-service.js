@@ -1,26 +1,28 @@
 angular.module('radioFreeTwitch')
 .service('streamService', function () {
 
-  this.setup = function(container, stream) {
+  this.setup = function(playerContainer, stream) {
     console.log('stream is ' + stream);
-    flowplayer(container, {
-      plugins: {
-        rtmp: {
-           url: "http://releases.flowplayer.org/swf/flowplayer.rtmp-3.2.13.swf",
-           failOverDelay: 4000
-        }
-      },
+
+    flowplayer(playerContainer, {
+
+      autoplay: true,
+
       clip: {
+        urlResolvers: null,
         live: true,
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: encodeURIComponent(stream)
+            src: encodeURIComponent(stream),
+
           }
         ]
       },
+
       debug: true,
       swf: '../components/flowplayer/flowplayer-3.2.13.swf'
+
     });
   }
 });

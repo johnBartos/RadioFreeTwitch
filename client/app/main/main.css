@@ -11,3 +11,12 @@
 .stream{
   margin-top: 5em;
 }
+
+.fp-ui > .fp-controls
+{
+    visibility: visible;
+}
+
+.stream {
+  visibility: hidden;
+}
