@@ -20,4 +20,9 @@
 
 .controls {
   margin-top: 5em;
+
+}
+
+.controls > .btn {
+  font-size: 5em;
 }

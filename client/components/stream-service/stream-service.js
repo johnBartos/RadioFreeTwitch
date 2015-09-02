@@ -14,8 +14,7 @@ angular.module('radioFreeTwitch')
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: encodeURIComponent(stream),
-
+            src: encodeURIComponent(stream)
           }
         ]
       },
