@@ -4,7 +4,7 @@ angular.module('radioFreeTwitch')
   this.setup = function(playerContainer, stream) {
     console.log('stream is ' + stream);
 
-    flowplayer(playerContainer, {
+    var player = flowplayer(playerContainer, {
 
       autoplay: true,
 
@@ -24,5 +24,7 @@ angular.module('radioFreeTwitch')
       swf: '../components/flowplayer/flowplayer-3.2.13.swf'
 
     });
+
+    return player;
   }
 });

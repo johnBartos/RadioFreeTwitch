@@ -8,15 +8,16 @@
   text-align: center;
 }
 
-.stream{
-  margin-top: 5em;
-}
 
-.fp-ui > .fp-controls
+/*.fp-ui > .fp-controls
 {
     visibility: visible;
-}
+}*/
 
 .stream {
   visibility: hidden;
+}
+
+.controls {
+  margin-top: 5em;
 }
