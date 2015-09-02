@@ -5,7 +5,10 @@ var rp = require('request-promise');
 var proxy = "http://localhost/api/chunk-proxy/";
 
 function prependServerUrlToChunks(body, proxy, server) {
-  return  body.split('\n').map(function(a) {
+  return body.split('\n').map(function(a) {
+    if (!a || a.length === 0) {
+      return '';
+    }
     if(a.charAt(0) != '#'){
       return proxy + encodeURIComponent(server + a);
     }
