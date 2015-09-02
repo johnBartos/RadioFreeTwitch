@@ -13,7 +13,6 @@ function getChunkOptions(chunk) {
 
 exports.get = function(req, res) {
   console.log('proxy get chunk');
-
   var chunk = decodeURIComponent(req.params.chunk);
   console.log(chunk);
 

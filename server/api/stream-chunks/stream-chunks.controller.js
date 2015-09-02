@@ -28,18 +28,18 @@ function getChunksOptions (stream) {
 
 exports.get = function(req, res) {
   console.log('getting stream chunks');
-  console.log(req.params.stream);
+//  console.log(req.params.stream);
   var stream = decodeURIComponent(req.params.stream);
   var server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
 
-  console.log(server + stream);
+  //console.log(server + stream);
 
   var getChunks = function (stream) {
     var options = getChunksOptions(stream);
 
     return rp(options)
       .then( function (body) {
-        console.log(body);
+    //    console.log(body);
         body = prependServerUrlToChunks(body, proxy, server);
         res.status(200).send(body);
       })
