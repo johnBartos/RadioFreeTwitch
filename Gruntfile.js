@@ -20,7 +20,7 @@ module.exports = function(grunt) {
           dot: true,
           src: [
           'client/bundle.js',
-          ]
+            ]
         }]
       },
     },
@@ -61,7 +61,7 @@ module.exports = function(grunt) {
         },
         files: {
           'client/index.html': [
-            'client/bundle.css',
+            'client/bower_components/bootstrap-css-only/css/bootstrap.min.css',
             'client/app/app.css'
           ]
         }
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
       target: {
         files: {
           'client/bundle.css': [
-            'node_modules/bootstrap/dist/css/bootstrap.min.css'
+              'client/app/app.css'
           ]
         }
       }
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('build', ['clean:dist', 'browserify:dist', 'cssmin', 'injector']);
+  grunt.registerTask('build', ['clean:dist', 'browserify:dist', 'injector']);
 
 
   grunt.registerTask('serve', function () {

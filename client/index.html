@@ -13,20 +13,20 @@
 
     <!-- build:css(client) app/vendor.css -->
     <!-- endbuild -->
+
+    <!-- fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet" type="text/css">
+
     <!-- build:css({.tmp,client}) app/app.css -->
       <!-- injector:css -->
-      <link rel="stylesheet" href="bundle.css">
+      <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.min.css">
       <link rel="stylesheet" href="app/app.css">
       <!-- endinjector -->
     <!-- endbuild -->
 
   <!-- flowplayer -->
   <link rel="stylesheet" href="https://releases.flowplayer.org/6.0.3/skin/functional.css">
-  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src="http://releases.flowplayer.org/6.0.3/flowplayer.js"></script>
-
 
   </head>
   <body ng-app="radioFreeTwitch">
@@ -48,6 +48,11 @@
     <script src="bundle.js"></script>
     <!-- endinjector -->
     <script src="components/stream-service/stream-service.js"></script>
+
+    <!-- flowplayer -->
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://releases.flowplayer.org/6.0.3/flowplayer.js"></script>
+
 
   </body>
 </html>
