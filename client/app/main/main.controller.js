@@ -18,8 +18,12 @@ angular.module('radioFreeTwitch')
     $scope.play = function () {
         getStream($scope.streamer).then(function (stream){
         console.log('stream is ' + stream);
-        $scope.player = streamService.setup(angular.element(document.getElementById('player')), stream);
+
+        $scope.player = streamService.setup(
+          angular.element(document.getElementById('player')),
+          streamService.buildClip(stream));
       });
+
     }
 
     $scope.togglePlayer = function () {
@@ -38,19 +42,7 @@ angular.module('radioFreeTwitch')
       getStream($scope.streamer).then(function (stream){
         var player = $scope.player;
 
-        var newClip = {
-          urlResolvers: null,
-          live: true,
-          sources: [
-            {
-              type: 'application/x-mpegurl',
-              src: encodeURIComponent(stream)
-            }
-          ]
-        };
-
-        console.log('refreshing ' + newClip);
-        player.load(newClip);
+        player.load(streamService.buildClip(stream));
       });
     }
 

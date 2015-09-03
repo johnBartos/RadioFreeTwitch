@@ -1,14 +1,25 @@
 angular.module('radioFreeTwitch')
 .service('streamService', function () {
 
-  this.setup = function(playerContainer, stream) {
-    console.log('stream is ' + stream);
+  this.setup = function(playerContainer, streamClip) {
+    console.log('setup player');
 
     var player = flowplayer(playerContainer, {
 
       autoplay: true,
 
-      clip: {
+      clip: streamClip,
+
+      // debug: true,
+      swf: '../components/flowplayer/flowplayer-3.2.13.swf'
+
+    });
+    return player;
+  };
+
+  this.buildClip = function (stream) {
+
+    return {
         urlResolvers: null,
         live: true,
         sources: [
@@ -21,13 +32,8 @@ angular.module('radioFreeTwitch')
           debug: true,
           fragmentloadmaxretry: 0
         }
-      },
+    }
 
-      // debug: true,
-      swf: '../components/flowplayer/flowplayer-3.2.13.swf'
-
-    });
-
-    return player;
   }
+
 });
