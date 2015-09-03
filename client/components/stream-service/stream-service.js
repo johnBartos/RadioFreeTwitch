@@ -16,10 +16,13 @@ angular.module('radioFreeTwitch')
             type: 'application/x-mpegurl',
             src: encodeURIComponent(stream)
           }
-        ]
+        ],
+        flashls: {
+          debug2: true
+        }
       },
 
-      debug: true,
+      // debug: true,
       swf: '../components/flowplayer/flowplayer-3.2.13.swf'
 
     });
