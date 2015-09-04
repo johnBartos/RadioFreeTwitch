@@ -6,8 +6,8 @@ function getChunkOptions(chunk) {
   return {
     uri : chunk,
     method: 'GET',
-    headers: {'user-agent': 'node.js'},
-    timeout: 100
+    headers: {'user-agent': 'node.js', 'Connection' : 'close'},
+    timeout: 50
   };
 }
 
@@ -16,15 +16,15 @@ exports.get = function(req, res) {
   var chunk = decodeURIComponent(req.params.chunk);
   console.log(chunk);
 
+  req.socket.setTimeout(50);
 
   var getChunk = function (chunk) {
-
     var options = getChunkOptions(chunk);
     return rp(options)
-    // .then(function (body) {
-    //   // res.setHeader('Content-type', 'video/mp2t');
-    //   // res.status(200).send(new Buffer(body));
-    // })
+    .on('error', function(reason) {
+      console.log(reason);
+      res.end();
+    })
     .pipe(res)
   };
 

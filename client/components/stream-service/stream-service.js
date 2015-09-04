@@ -24,7 +24,10 @@ angular.module('radioFreeTwitch')
         ],
         flashls: {
           debug: true,
-          fragmentloadmaxretry: 0
+          debug2: true
+          // fragmentloadmaxretry: 0,
+          // manifestloadmaxretry: 0,
+          // minbufferlength: 0
         }
     }
   }
