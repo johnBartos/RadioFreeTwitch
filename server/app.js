@@ -10,6 +10,11 @@ require('./config/express')(app);
 require('./routes.js')(app);
 
 app.listen(config.port);
+
+app.on('connection', function(socket) {
+  console.log('connection made');
+  socket.setTimeout(100);
+});
 console.log('Listening on ' + config.port + ' in ' + app.get('env') + ' mode...');
 
 exports = module.exports = app;

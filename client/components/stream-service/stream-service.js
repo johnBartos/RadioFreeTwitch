@@ -5,20 +5,14 @@ angular.module('radioFreeTwitch')
     console.log('setup player');
 
     var player = flowplayer(playerContainer, {
-
       autoplay: true,
-
-      clip: streamClip,
-
-      // debug: true,
-      swf: '../components/flowplayer/flowplayer-3.2.13.swf'
-
+      clip: streamClip
     });
+
     return player;
   };
 
   this.buildClip = function (stream) {
-
     return {
         urlResolvers: null,
         live: true,
@@ -33,7 +27,6 @@ angular.module('radioFreeTwitch')
           fragmentloadmaxretry: 0
         }
     }
-
   }
 
 });

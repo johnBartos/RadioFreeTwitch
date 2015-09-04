@@ -7,7 +7,7 @@ function getChunkOptions(chunk) {
     uri : chunk,
     method: 'GET',
     headers: {'user-agent': 'node.js'},
-    timeout: 1000*5
+    timeout: 100
   };
 }
 
@@ -15,6 +15,7 @@ exports.get = function(req, res) {
   console.log('proxy get chunk');
   var chunk = decodeURIComponent(req.params.chunk);
   console.log(chunk);
+
 
   var getChunk = function (chunk) {
 
