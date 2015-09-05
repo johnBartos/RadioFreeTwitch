@@ -22,7 +22,8 @@ function getChunksOptions (stream) {
   return {
     uri: stream,
     method: 'GET',
-    headers: {'user-agent': 'node.js'}
+    headers: {'user-agent': 'node.js'},
+    timeout: 1000
     }
 }
 

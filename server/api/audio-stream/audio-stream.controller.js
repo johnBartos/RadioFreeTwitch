@@ -17,7 +17,8 @@ function getAccessTokenOptions(req)
      uri : 'https://api.twitch.tv/api/channels/' + req.params.name +'/access_token',
      method: 'GET',
      headers: {'user-agent': 'node.js'},
-     transform: parseAccessToken
+     transform: parseAccessToken,
+     timeout: 1000
    };
 }
 
@@ -36,7 +37,8 @@ function getStreamOptions(access_token)
   uri: 'http://usher.twitch.tv/api/channel/hls/' + access_token.name + '.m3u8?player=twitchweb&&token='+  access_token.token + '&sig=' + access_token.sig +'&allow_audio_only=true&allow_source=true&type=any&p={123456}',
     method: 'GET',
     headers: {'user-agent': 'node.js'},
-    transform: parseStream
+    transform: parseStream,
+    timeout: 1000
   };
 }
 

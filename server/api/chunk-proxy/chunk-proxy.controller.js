@@ -8,7 +8,7 @@ function getChunkOptions(chunk) {
     uri : chunk,
     method: 'GET',
     headers: {'user-agent': 'node.js', 'Connection' : 'close'},
-    timeout: 100,
+    timeout: 200,
     resolveWithFullResponse: true
   };
 }
@@ -19,6 +19,12 @@ exports.get = function(req, res) {
   console.log(chunk);
 
   var buf = [];
+  var Readable = require('stream').Readable;
+  var rs = new Readable({
+    highWaterMark: 200000
+  });
+
+  var gotError = false;
 
   var getChunk = function (chunk) {
     var options = getChunkOptions(chunk);
@@ -26,10 +32,12 @@ exports.get = function(req, res) {
     return request(options)
     .on('error', function(reason) {
       console.log(reason);
+      gotError = true;
+      this.end();
       res.end();
-    })
-    .on('timeout', function() {
-      console.log('############# TIMEOUT ##############')
+      console.log('closed stream');
+      buf = [];
+      console.log('cleared buffer');
     })
     .on('data',function(streamChunk) {
       console.log('got data');
@@ -37,10 +45,14 @@ exports.get = function(req, res) {
     })
     .on('end', function(body) {
       console.log('pipe ended');
+      this.end();
+
+      if(gotError) {
+        return;
+      }
       var newRes = Buffer.concat(buf);
       res.status(200).send(newRes);
     });
   };
-
   getChunk(chunk);
 }
