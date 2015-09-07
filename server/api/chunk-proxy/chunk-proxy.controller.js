@@ -29,17 +29,15 @@ exports.get = function(req, res) {
       console.log(reason);
       gotError = true;
       this.end();
-      res.end();
-      console.log('closed stream');
-      buf = [];
-      console.log('cleared buffer');
+      res.status(404).end();
+      console.log('error encountered, closed stream');
     })
     .on('data',function(streamChunk) {
       console.log('got data');
       buf.push(streamChunk);
     })
     .on('end', function(body) {
-      console.log('pipe ended');
+      console.log('stream ended');
       this.end();
 
       if(gotError) {
@@ -50,4 +48,5 @@ exports.get = function(req, res) {
     });
   };
   getChunk(chunk);
+  buf = [];
 }
