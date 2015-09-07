@@ -19,11 +19,6 @@ exports.get = function(req, res) {
   console.log(chunk);
 
   var buf = [];
-  var Readable = require('stream').Readable;
-  var rs = new Readable({
-    highWaterMark: 200000
-  });
-
   var gotError = false;
 
   var getChunk = function (chunk) {

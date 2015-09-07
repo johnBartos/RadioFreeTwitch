@@ -18,7 +18,7 @@ function getAccessTokenOptions(req)
      method: 'GET',
      headers: {'user-agent': 'node.js'},
      transform: parseAccessToken,
-     timeout: 1000
+     timeout: 10000
    };
 }
 
@@ -38,7 +38,7 @@ function getStreamOptions(access_token)
     method: 'GET',
     headers: {'user-agent': 'node.js'},
     transform: parseStream,
-    timeout: 1000
+    timeout: 10000
   };
 }
 
