@@ -25,6 +25,7 @@
         <button class="btn btn-default btn-lg" ng-click="stream.refreshPlayer()">
           <span class="glyphicon glyphicon-refresh"></span>
         </button>
+        <input type="range" min="0" max="100" ng-model="stream.volume"></input>
       </div>
       <div id="player" class="stream fixed-controls"></div>
     </div>
