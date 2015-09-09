@@ -3,15 +3,6 @@
 var request= require('request');
 var rp = require('request-promise');
 
-function getChunkOptions(chunk) {
-  return {
-    uri : chunk,
-    method: 'GET',
-    headers: {'user-agent': 'node.js', 'Connection' : 'close'},
-    timeout: 200,
-    resolveWithFullResponse: true
-  };
-}
 
 exports.get = function(req, res) {
   console.log('proxy get chunk');
@@ -49,4 +40,14 @@ exports.get = function(req, res) {
   };
   getChunk(chunk);
   buf = [];
+};
+
+function getChunkOptions(chunk) {
+  return {
+    uri : chunk,
+    method: 'GET',
+    headers: {'user-agent': 'node.js', 'Connection' : 'close'},
+    timeout: 200,
+    resolveWithFullResponse: true
+  };
 }
