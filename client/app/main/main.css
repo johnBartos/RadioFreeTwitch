@@ -9,14 +9,18 @@
 }
 
 .stream {
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 
 .controls {
   margin-top: 5em;
-
 }
 
 .controls > .btn {
   font-size: 5em;
+}
+
+.flowplayer .fp-engine {
+  height: 1000px;
+  width: 1000px;
 }
