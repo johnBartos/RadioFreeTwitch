@@ -47,7 +47,7 @@ function getChunkOptions(chunk) {
     uri : chunk,
     method: 'GET',
     headers: {'user-agent': 'node.js', 'Connection' : 'close'},
-    timeout: 200,
+    timeout: 1000,
     resolveWithFullResponse: true
   };
 }
