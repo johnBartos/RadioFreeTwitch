@@ -14,7 +14,7 @@ angular.module('radioFreeTwitch')
             angular.element(document.getElementById('player')),
             streamService.buildClip(stream));
         });
-    }
+    };
 
     $scope.stream.togglePlayer = function () {
         var player = $scope.stream.player;
@@ -26,14 +26,14 @@ angular.module('radioFreeTwitch')
         else {
           player.pause();
         }
-    }
+    };
 
     $scope.stream.refreshPlayer = function () {
       getStream($scope.stream.streamer).then(function (stream){
         var player = $scope.stream.player;
         player.load(streamService.buildClip(stream));
       });
-    }
+    };
 
     function getStream (streamer) {
       var streamUri = $http.get('api/audio-stream/' + streamer + '.m3u8')

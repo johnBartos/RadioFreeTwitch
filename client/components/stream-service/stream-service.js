@@ -14,22 +14,12 @@ angular.module('radioFreeTwitch')
 
   this.buildClip = function (stream) {
     return {
-        urlResolvers: null,
-        live: true,
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: encodeURIComponent(stream)
+            src: stream
           }
-        ],
-        flashls: {
-          debug: true,
-          debug2: true
-          // fragmentloadmaxretry: 0,
-          // manifestloadmaxretry: 0,
-          // minbufferlength: 0
-        }
-    }
-  }
-
+        ]
+    };
+  };
 });
