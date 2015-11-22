@@ -1,4 +1,4 @@
-'use strict'
+(function(){'use strict';})();
 
 var angular = require('angular');
 
