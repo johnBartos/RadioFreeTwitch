@@ -1,3 +1,5 @@
+(function(){'use strict';})();
+
 angular.module('radioFreeTwitch')
   .controller('MainController', function($scope, $http, streamService) {
 

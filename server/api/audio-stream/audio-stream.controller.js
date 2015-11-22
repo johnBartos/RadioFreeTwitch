@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var rp = require('request-promise');
 
@@ -21,7 +21,7 @@ exports.get = function(req,res) {
           reason: reason
         });
       });
-    }
+    };
 
     var getStream = function (access_token) {
       console.log('sendStreamRequest');
@@ -48,7 +48,7 @@ exports.get = function(req,res) {
           reason: reason
         });
       });
-    }
+    };
 
     getAccessToken(req)
     .then(getStream);

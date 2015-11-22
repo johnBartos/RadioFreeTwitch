@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var controller = require('./chunk-proxy.controller.js');
 

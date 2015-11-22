@@ -1,3 +1,5 @@
+(function(){'use strict';})();
+
 angular.module('radioFreeTwitch')
   .config( function($stateProvider) {
     $stateProvider

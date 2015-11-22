@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var rp = require('request-promise');
 var proxy = "http://localhost/api/chunk-proxy/";
@@ -24,7 +24,7 @@ exports.get = function(req, res) {
         });
 
       });
-  }
+  };
     getChunks(stream);
 };
 
@@ -48,5 +48,5 @@ function getChunksOptions (stream) {
     method: 'GET',
     headers: {'user-agent': 'node.js'},
     timeout: 1000
-  }
+  };
 }

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var controller = require('./audio-stream.controller.js');
 

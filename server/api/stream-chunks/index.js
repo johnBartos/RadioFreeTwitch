@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var controller = require('./stream-chunks.controller.js');
 
