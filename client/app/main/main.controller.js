@@ -10,42 +10,16 @@ angular.module('radioFreeTwitch')
     $scope.stream.player = null;
 
     $scope.stream.play = function () {
-        getStream($scope.stream.streamer).then(function (stream){
-          console.log('stream is ' + stream);
-          $scope.stream.player = streamService.setup(
-            angular.element(document.getElementById('player')),
-            streamService.buildClip(stream));
-        });
+      var playerContainer = document.getElementById('player');
+      streamSerice.play(playerContianer, $scope.stream.streamer);
     };
 
-    $scope.stream.togglePlayer = function () {
-        var player = $scope.stream.player;
-        console.log('player: ' + player);
-
-        if(player.paused) {
-          player.play();
-        }
-        else {
-          player.pause();
-        }
+    $scope.stream.togglePlayState = function () {
+      streamService.togglePlayPause();
     };
 
     $scope.stream.refreshPlayer = function () {
-      getStream($scope.stream.streamer).then(function (stream){
-        var player = $scope.stream.player;
-        player.load(streamService.buildClip(stream));
-      });
+      streamService.refresh();
     };
-
-    function getStream (streamer) {
-      var streamUri = $http.get('api/audio-stream/' + streamer + '.m3u8')
-      .then(function(result) {
-        console.log('proxy url is ' + result.data);
-        return result.data;
-      }, function(error) {
-        console.log('ERROR ' + error);
-      });
-      return streamUri;
-    }
-
+    
   });
