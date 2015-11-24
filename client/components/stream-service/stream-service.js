@@ -5,6 +5,7 @@ angular.module('radioFreeTwitch')
 
   var player = {};
 
+
   this.setup = function(playerContainer, stream) {
     var clip = buildClip(stream);
 
