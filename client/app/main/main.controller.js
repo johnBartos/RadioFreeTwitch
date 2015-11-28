@@ -8,23 +8,23 @@ angular.module('radioFreeTwitch')
 
     var _player = playerFactory(document.getElementById('player'));
 
-    $scope.stream.play = function() {
-      play();
+    $scope.stream.start = function() {
+      start();
     };
 
     $scope.stream.refreshPlayer = function () {
-      play();
+      start();
     };
 
     $scope.stream.togglePause = function () {
       _player.togglePause();
     };
 
-    function play() {
+    function start() {
       console.log('playing ' + $scope.stream.streamName);
       streamService.getStream($scope.stream.streamName)
         .then(function(manifestUrl) {
-          _player.play(manifestUrl);
+          _player.start(manifestUrl);
         }, function(error) {
           console.log('ERROR ' + error);
         });

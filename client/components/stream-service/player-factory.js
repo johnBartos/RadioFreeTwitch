@@ -5,8 +5,6 @@ angular.module('radioFreeTwitch')
 
   return function(container) {
 
-    var _player = setup('');
-
     function setup(manifestUrl) {
       return flowplayer(container, {
         autoplay: true,
@@ -26,10 +24,8 @@ angular.module('radioFreeTwitch')
     }
 
     return {
-      play : function(manifestUrl) {
-        console.log('loading clip ' + manifestUrl);
-        _player.load(buildClip(manifestUrl));
-        // setup(manifestUrl);
+      start : function(manifestUrl) {
+        setup(manifestUrl);
       },
       togglePause : function() {
         _player.paused ? _player.play() : _player.pause();
