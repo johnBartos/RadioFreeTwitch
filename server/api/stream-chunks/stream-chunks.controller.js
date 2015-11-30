@@ -1,34 +1,34 @@
 'use strict';
 
 var rp = require('request-promise');
-var proxy = "http://localhost/api/chunk-proxy/";
 
 exports.get = function(req, res) {
   console.log('getting stream chunks');
-  var stream = decodeURIComponent(req.params.stream);
-  var server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
 
-  var getChunks = function (stream) {
+  var getChunks = function (stream, server) {
     var options = getChunksOptions(stream);
 
     return rp(options)
-      .then( function (body) {
-        body = prependServerUrlToChunks(body, proxy, server);
+      .then(function (body) {
+        body = prependServerUrlToChunks(body, server);
         res.status(200).send(body);
       })
-      .catch( function (reason) {
-        console.log(reason);
+      .catch(function (reason) {
         res.status(400).json({
           success: false,
           reason: reason
         });
-
       });
-  };
-    getChunks(stream);
+    };
+
+  var stream = decodeURIComponent(req.params.stream);
+  var server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
+  getChunks(stream, server);
 };
 
-function prependServerUrlToChunks(body, proxy, server) {
+function prependServerUrlToChunks(body, server) {
+  var proxy = "http://localhost/api/chunk-proxy/";
+
   return body.split('\n').map(function(a) {
     if (!a || a.length === 0) {
       return '';

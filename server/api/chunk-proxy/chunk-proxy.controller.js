@@ -6,22 +6,18 @@ var rp = require('request-promise');
 
 exports.get = function(req, res) {
   console.log('proxy get chunk');
-  var chunk = decodeURIComponent(req.params.chunk);
-  console.log(chunk);
 
+  var chunk = decodeURIComponent(req.params.chunk);
   var buf = [];
   var gotError = false;
 
-  var getChunk = function (chunk) {
+  var getChunk = function(chunk) {
     var options = getChunkOptions(chunk);
-
     return request(options)
     .on('error', function(reason) {
-      console.log(reason);
       gotError = true;
       this.end();
-      res.status(404).end();
-      console.log('error encountered, closed stream');
+      console.log('error encountered, closed stream ' + reason);
     })
     .on('data',function(streamChunk) {
       console.log('got data');
@@ -29,15 +25,18 @@ exports.get = function(req, res) {
     })
     .on('end', function(body) {
       console.log('stream ended');
-      this.end();
 
       if(gotError) {
+        res.status(404).end();
         return;
       }
+
+      this.end();
       var newRes = Buffer.concat(buf);
       res.status(200).send(newRes);
     });
   };
+
   getChunk(chunk);
   buf = [];
 };
