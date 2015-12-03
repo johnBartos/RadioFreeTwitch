@@ -30,7 +30,7 @@ exports.get = function(req, res) {
 
     var streamName = req.params.streamName;
 
-    accessTokenController.get(streamName)
+    accessTokenController(streamName)
       .then(function(token) {
         getStream(streamName, token);
       })
