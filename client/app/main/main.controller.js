@@ -4,30 +4,29 @@ angular.module('radioFreeTwitch')
   .controller('MainController', function($scope, $http, streamService, playerFactory) {
 
     $scope.stream = {};
-    $scope.stream.streamName = "";
+    $scope.stream.streamName = '';
 
-    var _player = playerFactory(document.getElementById('player'));
+    const _player = playerFactory(document.getElementById('player'));
+
+    const start = () => {
+      console.log('playing ' + $scope.stream.streamName);
+      streamService.getStream($scope.stream.streamName)
+        .then((manifestUrl) => {
+          _player.start(manifestUrl);
+        }, (error) => {
+          console.log('ERROR ' + error);
+        });
+    }
 
     $scope.stream.start = function() {
       start();
     };
 
-    $scope.stream.refreshPlayer = function () {
+    $scope.stream.refreshPlayer = function() {
       start();
     };
 
-    $scope.stream.togglePause = function () {
+    $scope.stream.togglePause = function() {
       _player.togglePause();
     };
-
-    function start() {
-      console.log('playing ' + $scope.stream.streamName);
-      streamService.getStream($scope.stream.streamName)
-        .then(function(manifestUrl) {
-          _player.start(manifestUrl);
-        }, function(error) {
-          console.log('ERROR ' + error);
-        });
-    }
-
   });

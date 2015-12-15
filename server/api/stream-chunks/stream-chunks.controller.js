@@ -1,52 +1,47 @@
 'use strict';
 
-var rp = require('request-promise');
+const rp = require('request-promise');
 
-exports.get = function(req, res) {
+const get = function getStreamChunks(req, res) {
   console.log('getting stream chunks');
 
-  var getChunks = function (stream, server) {
-    var options = getChunksOptions(stream);
 
-    return rp(options)
-      .then(function (body) {
-        body = prependServerUrlToChunks(body, server);
-        res.status(200).send(body);
-      })
-      .catch(function (reason) {
-        res.status(400).json({
-          success: false,
-          reason: reason
-        });
-      });
+  const stream = decodeURIComponent(req.params.stream.slice(0, req.params.stream.length - 5));
+  const server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
+
+  const prependServerUrlToChunks = (body) => {
+    return body.split('\n').map((a) => {
+      if (!a || a.length === 0) {
+        return '';
+      }
+      if (a.charAt(0) !== '#') {
+        return 'http://localhost/api/chunk-proxy/' + encodeURIComponent(server + a);
+      }
+    }).join('\n');
+  };
+
+  const getChunksOptions = () => {
+    return {
+      uri: stream,
+      method: 'GET',
+      headers: { 'user-agent': 'node.js' },
+      timeout: 1000
     };
+  };
 
-  var stream = decodeURIComponent(req.params.stream);
-  var server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
-  getChunks(stream, server);
+  const getChunks = () => {
+    return rp(getChunksOptions(stream))
+      .then((body) => {
+        res.status(200).send(prependServerUrlToChunks(body, server));
+      })
+      .catch((reason) => {
+        res.status(400).json({ success: false, reason });
+      });
+  };
+
+  return (() => getChunks(stream, server))();
 };
 
-function prependServerUrlToChunks(body, server) {
-  var proxy = "http://localhost/api/chunk-proxy/";
-
-  return body.split('\n').map(function(a) {
-    if (!a || a.length === 0) {
-      return '';
-    }
-    if(a.charAt(0) != '#'){
-      return proxy + encodeURIComponent(server + a);
-    }
-    else {
-      return a;
-    }
-  }).join("\n");
-}
-
-function getChunksOptions (stream) {
-  return {
-    uri: stream,
-    method: 'GET',
-    headers: {'user-agent': 'node.js'},
-    timeout: 1000
-  };
-}
+module.exports = {
+  get: get
+};

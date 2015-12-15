@@ -25,6 +25,8 @@
     "angular-ui-router": "^0.2.15",
     "bootstrap": "^3.3.5",
     "cssify": "^0.7.0",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.1.0",
     "grunt": "^0.4.5",
     "grunt-browserify": "^4.0.0",
     "grunt-contrib-clean": "^0.6.0",

@@ -1,9 +1,7 @@
 'use strict';
 
-var controller = require('./stream-chunks.controller.js');
-
-var express = require('express');
-var router = express.Router();
+const controller = require('./stream-chunks.controller.js');
+const router = require('express').Router();
 
 router.get('/:stream', controller.get);
 

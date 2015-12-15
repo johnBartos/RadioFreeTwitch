@@ -1,9 +1,7 @@
 'use strict';
 
-var controller = require('./chunk-proxy.controller.js');
-
-var express = require('express');
-var router = express.Router();
+const controller = require('./chunk-proxy.controller.js');
+const router = require('express').Router();
 
 router.get('/:chunk', controller.get);
 

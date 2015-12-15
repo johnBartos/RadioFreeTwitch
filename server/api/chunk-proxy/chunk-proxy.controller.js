@@ -1,18 +1,28 @@
 'use strict';
 
-var request= require('request');
-var rp = require('request-promise');
+const request = require('request');
 
-exports.get = function(req, res) {
+const get = function proxyGetChunk(req, res) {
   console.log('proxy get chunk');
 
-  var getChunk = function(chunk) {
-    var gotError = false;
-    var buf = [];
-    var options = getChunkOptions(chunk);
+  const streamChunk = decodeURIComponent(req.params.chunk);
 
-    return request(options)
-      .on('error', function(reason) {
+  const options = () => {
+    return {
+      uri: streamChunk,
+      method: 'GET',
+      headers: { 'user-agent': 'node.js', 'Connection': 'close' },
+      timeout: 1000,
+      resolveWithFullResponse: true
+    };
+  };
+
+  const getChunk = () => {
+    let gotError = false;
+    const buf = [];
+
+    return request(options())
+      .on('error', (reason) => {
         gotError = true;
         this.end();
         console.log('error encountered, closed stream ' + reason);
@@ -24,27 +34,20 @@ exports.get = function(req, res) {
       .on('end', function(body) {
         console.log('stream ended');
 
-        if(gotError) {
+        if (gotError) {
           res.status(404).end();
           return;
         }
 
         this.end();
-        var newRes = Buffer.concat(buf);
+        const newRes = Buffer.concat(buf);
         res.status(200).send(newRes);
       });
   };
 
-  var chunk = decodeURIComponent(req.params.chunk);
-  getChunk(chunk);
+  return (() => getChunk(streamChunk))();
 };
 
-function getChunkOptions(chunk) {
-  return {
-    uri : chunk,
-    method: 'GET',
-    headers: {'user-agent': 'node.js', 'Connection' : 'close'},
-    timeout: 1000,
-    resolveWithFullResponse: true
-  };
-}
+module.exports = {
+  get: get
+};
