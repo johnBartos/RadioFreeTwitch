@@ -1,38 +1,39 @@
-(function(){'use strict';})();
+(() => 'use strict')();
 
 angular.module('radioFreeTwitch')
-.factory('playerFactory', function () {
-
-  return function(container) {
-    function setup(manifestUrl) {
-      flowplayer.conf.hlsjs = {
-        debug: true,
-        debug2: true
-      };
-      return flowplayer(container, {
-        autoplay: true,
-        clip: buildClip(manifestUrl)
-      });
-    }
-
-    function buildClip(manifestUrl) {
+.factory('playerFactory', function playerFactory() {
+  return function createPlayer(container) {
+    function buildClip(uri) {
       return {
         sources: [
           {
             type: 'application/x-mpegurl',
-            src: manifestUrl + '.m3u8'
+            src: uri
           }
         ]
       };
     }
 
+    function start(manifestUri) {
+      const player = flowplayer(container, {
+        autoplay: true,
+        clip: buildClip(manifestUri)
+      });
+
+      return {
+        togglePause: () => {
+          if (player.paused) {
+            player.play();
+          }
+          else {
+            player.pause();
+          }
+        }
+      };
+    }
+
     return {
-      start: function(manifestUrl) {
-        setup(manifestUrl);
-      },
-      togglePause: function() {
-        _player.paused ? _player.play() : _player.pause();
-      }
+      start
     };
   };
 });

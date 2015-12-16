@@ -1,14 +1,13 @@
 (function(){'use strict';})();
 
 angular.module('radioFreeTwitch')
-.service('streamService', function ($http) {
-
-  this.getStream = function(streamName) {
+.service('streamService', function streamService($http) {
+  this.getStream = streamName => {
     return $http.get('api/audio-stream/' + streamName)
-      .then(function(result) {
+      .then(result => {
         return result.data;
-      }, function(error) {
+      }, error => {
         console.log('ERROR ' + error);
       });
-    };
+  };
 });

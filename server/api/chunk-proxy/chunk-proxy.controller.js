@@ -3,49 +3,42 @@
 const request = require('request');
 
 const get = function proxyGetChunk(req, res) {
-  console.log('proxy get chunk');
-
-  const streamChunk = decodeURIComponent(req.params.chunk);
-
-  const options = () => {
+  function options(uri) {
     return {
-      uri: streamChunk,
+      uri,
       method: 'GET',
       headers: { 'user-agent': 'node.js', 'Connection': 'close' },
       timeout: 1000,
       resolveWithFullResponse: true
     };
-  };
+  }
 
-  const getChunk = () => {
+  function getChunk(uri) {
     let gotError = false;
     const buf = [];
 
-    return request(options())
-      .on('error', (reason) => {
+    return request(options(uri))
+      .on('error', function onStreamError() {
         gotError = true;
         this.end();
-        console.log('error encountered, closed stream ' + reason);
       })
-      .on('data',function(streamChunk) {
-        console.log('got data');
+      .on('data', function onStreamChunk(streamChunk) {
         buf.push(streamChunk);
       })
-      .on('end', function(body) {
-        console.log('stream ended');
-
+      .on('end', function endStream() {
         if (gotError) {
           res.status(404).end();
           return;
         }
 
         this.end();
-        const newRes = Buffer.concat(buf);
-        res.status(200).send(newRes);
+        res.status(200).send(Buffer.concat(buf));
       });
-  };
+  }
 
-  return (() => getChunk(streamChunk))();
+  return (() => {
+    getChunk(decodeURIComponent(req.params.chunk));
+  })();
 };
 
 module.exports = {

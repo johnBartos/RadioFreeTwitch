@@ -3,43 +3,42 @@
 const rp = require('request-promise');
 
 const get = function getStreamChunks(req, res) {
-  console.log('getting stream chunks');
-
-
-  const stream = decodeURIComponent(req.params.stream.slice(0, req.params.stream.length - 5));
-  const server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
-
-  const prependServerUrlToChunks = (body) => {
+  function prependServerUrlToChunks(body, serverUri) {
     return body.split('\n').map((a) => {
       if (!a || a.length === 0) {
         return '';
       }
       if (a.charAt(0) !== '#') {
-        return 'http://localhost/api/chunk-proxy/' + encodeURIComponent(server + a);
+        return 'http://localhost/api/chunk-proxy/' + encodeURIComponent(serverUri + a);
       }
+      return a;
     }).join('\n');
-  };
+  }
 
-  const getChunksOptions = () => {
+  function options(streamUri) {
     return {
-      uri: stream,
+      uri: streamUri,
       method: 'GET',
       headers: { 'user-agent': 'node.js' },
       timeout: 1000
     };
-  };
+  }
 
-  const getChunks = () => {
-    return rp(getChunksOptions(stream))
-      .then((body) => {
-        res.status(200).send(prependServerUrlToChunks(body, server));
+  function getChunks(streamUri, serverUri) {
+    return rp(options(streamUri))
+      .then(body => {
+        res.status(200).send(prependServerUrlToChunks(body, serverUri));
       })
-      .catch((reason) => {
+      .catch(reason => {
         res.status(400).json({ success: false, reason });
       });
-  };
+  }
 
-  return (() => getChunks(stream, server))();
+  return (() => {
+    const stream = decodeURIComponent(req.params.stream);
+    const server = stream.substring(0, stream.indexOf('py-index-live.m3u8'));
+    getChunks(stream, server);
+  })();
 };
 
 module.exports = {

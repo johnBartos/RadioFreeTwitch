@@ -1,16 +1,16 @@
 'use strict';
 
 const rp = require('request-promise');
-console.log('getting access token');
+
 const get = function getAccessToken(streamName) {
-  const options = () => {
-    const parseAccessToken = (body) => {
+  function options() {
+    function parseAccessToken(body) {
       const parsedBody = JSON.parse(body);
       return {
         token: parsedBody.token,
         sig: parsedBody.sig
       };
-    };
+    }
 
     return {
       uri: 'https://api.twitch.tv/api/channels/' + streamName + '/access_token',
@@ -19,7 +19,7 @@ const get = function getAccessToken(streamName) {
       transform: parseAccessToken,
       timeout: 10000
     };
-  };
+  }
 
   return (() => {
     return rp(options(streamName));

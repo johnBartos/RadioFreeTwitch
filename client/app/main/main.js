@@ -1,7 +1,7 @@
-(function(){'use strict';})();
+(() => 'use strict')();
 
 angular.module('radioFreeTwitch')
-  .config( function($stateProvider) {
+  .config(function configMainController($stateProvider) {
     $stateProvider
       .state('main', {
         url: '/',
