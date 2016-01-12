@@ -13,9 +13,10 @@ Unfortunately, Flowplayer is rather finnicky when playing HLS streams. It tends 
 As a bonus, this website works purely in HTML5 (unlike Twitch itself) thanks to Dailymotion's [HLS.js module](https://github.com/dailymotion/hls.js/tree/master).
 
 
-#Does it work?
-Yep! The front end is a mess though, and I'm still working up the strength to fix it. Angular was a mistake. 
+#Is it done?
+Almost! You can pull the source and run it just fine, but the front is a mess.
 
-#Will it ever be finished?
-
+#To-do
+- Replace Angular with React
+- Learn how to make pretty websites
 
