@@ -1,6 +1,5 @@
 const React = require('react');
 const PropTypes = React.PropTypes;
-const Navbar = require('../components/Navbar.jsx');
 
 const App = React.createClass({
   propTypes: {
@@ -10,12 +9,8 @@ const App = React.createClass({
   render: function renderApp() {
     return (
       <section className="App">
-        <div className="container-fluid nav">
-          <Navbar />
-        </div>
         <div className="container main">
-          <p>hello</p>
-        </div>
+          <h1 className="text-xs-center">HELLO CRUEL WORLD</h1>
         {this.props.children}
       </section>
     );

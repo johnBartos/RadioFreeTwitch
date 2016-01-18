@@ -9,7 +9,6 @@ const history = require('history').createHistory();
 ReactDOM.render(
   <Router history={history}>
     <Route name="home" path="/" component={App} />
-    <Route name="nowhere" path="/nowhere" component={Nowhere} />
   </Router>,
   document.getElementById('root')
 );
