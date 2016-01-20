@@ -1,6 +1,5 @@
 const React = require('react');
 const PropTypes = React.PropTypes;
-const Navbar = require('../components/Navbar.jsx');
 const Header = require('../components/Header.jsx');
 
 const App = React.createClass({
@@ -11,11 +10,10 @@ const App = React.createClass({
   render: function renderApp() {
     return (
       <section className="App">
-        <div className="container-fluid nav">
+        <div className="container-fluid nav" style={{ padding: '0' }}>
           <Header />
         </div>
         <div className="container main">
-          <p>hello</p>
         </div>
         {this.props.children}
       </section>

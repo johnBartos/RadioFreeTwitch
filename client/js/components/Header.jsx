@@ -1,17 +1,17 @@
 const React = require('react');
 
 const headerStyle = {
-  backgroundColor: '#D91E18',
+  backgroundColor: 'rgba(40, 0, 215, 0.9)',
   borderRadius: '0',
-  height: '300px',
   color: '#FFF'
 };
 
 const Header = React.createClass({
   render: function renderNavbar() {
     return (
-      <div className="jumbotron" style={headerStyle}>
-        <h1 class="display-4">RadioFreeTwitch</h1>
+      <div className="jumbotron dotted" style={headerStyle}>
+        <h1 className="display-4">Stream <hr style= {{ backgroundColor: 'white' }}/></h1>
+        <h1 className="display-4" style={{ paddingLeft: '1em' }}>Radio</h1>
       </div>
     );
   }
