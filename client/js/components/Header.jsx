@@ -11,7 +11,7 @@ const Header = React.createClass({
     return (
       <div className="jumbotron dotted" style={headerStyle}>
         <h1 className="display-4">Stream <hr style= {{ backgroundColor: 'white' }}/></h1>
-        <h1 className="display-4" style={{ paddingLeft: '1em' }}>Radio</h1>
+        <h1 className="display-4" style={{ paddingLeft: '1em' }}>Rad.io</h1>
       </div>
     );
   }
