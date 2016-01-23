@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = React.PropTypes;
 const Header = require('../components/Header.jsx');
+const Searchbar = require('../components/Searchbar.jsx');
 
 const App = React.createClass({
   propTypes: {
@@ -13,6 +14,7 @@ const App = React.createClass({
         <div className="container-fluid nav" style={{ padding: '0' }}>
           <Header />
         </div>
+        <Searchbar />
         <div className="container main">
         </div>
         {this.props.children}
