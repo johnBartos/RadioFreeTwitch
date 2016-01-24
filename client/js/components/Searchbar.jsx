@@ -1,4 +1,5 @@
 const React = require('react');
+const PlayerActions = require('../actions/PlayerActions');
 const ReactPropTypes = React.PropTypes;
 
 const style = {

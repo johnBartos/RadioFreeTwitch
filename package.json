@@ -22,6 +22,7 @@
     "express": "^4.13.3",
     "flux": "^2.1.1",
     "history": "^1.17.0",
+    "keymirror": "^0.1.1",
     "nodemon": "^1.8.1",
     "npm-run-all": "^1.4.0",
     "react": "^0.14.3",

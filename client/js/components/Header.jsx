@@ -3,7 +3,7 @@ const React = require('react');
 const headerStyle = {
   borderRadius: '0',
   color: '#000',
-  marginBottom: '10em'
+  marginBottom: '5em'
 };
 
 const Header = React.createClass({
