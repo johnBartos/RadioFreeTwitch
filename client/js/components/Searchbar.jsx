@@ -2,14 +2,14 @@ const React = require('react');
 const ReactPropTypes = React.PropTypes;
 
 const style = {
-  color: 'black',
+  color: '#4183D7',
   border: '1px solid black'
 };
 
 const Searchbar = React.createClass({
   getInitialState: () => {
     return {
-      stream: 'stream name'
+      stream: ''
     };
   },
   render: function renderSearchbar() {
@@ -17,7 +17,7 @@ const Searchbar = React.createClass({
       <div className="row search-bar">
         <div className="col-xs-offset-3 col-xs-6">
          <div className="input-group">
-           <input type="text" className="form-control" name="search-bar" value={this.state.stream} onChange={this._onChange} style={style}></input>
+           <input type="text" className="form-control" name="search-bar" placeholder='stream' value={this.state.stream} onChange={this._onChange} style={style}></input>
            <span className="input-group-btn">
              <button className="btn btn-secondary" type="submit" onClick={this.onPress} style={style}>Go!</button>
            </span>
@@ -27,7 +27,7 @@ const Searchbar = React.createClass({
     );
   },
   _onChange: function onSearchChange(event) {
-    this.setState({stream: event.target.value});
+    this.setState({ stream: event.target.value });
   }
 });
 
