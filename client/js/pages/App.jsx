@@ -11,12 +11,11 @@ const App = React.createClass({
   render: function renderApp() {
     return (
       <section className="App">
-        <div className="container-fluid nav" style={{ padding: '0' }}>
-          <Header />
-        </div>
-        <Searchbar />
-        <div className="container main">
-        </div>
+        <Header
+         />
+         <h2 className="display-0 text-xs-center" style={{ marginBottom: '1em' }}>listen to some <span style={{ color: '#4183D7' }}>twitch</span> streams</h2>
+        <Searchbar
+         />
         {this.props.children}
       </section>
     );

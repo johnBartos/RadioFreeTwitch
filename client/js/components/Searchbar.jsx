@@ -18,9 +18,9 @@ const Searchbar = React.createClass({
       <div className="row search-bar">
         <div className="col-xs-offset-3 col-xs-6">
          <div className="input-group">
-           <input type="text" className="form-control" name="search-bar" placeholder='stream' value={this.state.stream} onChange={this._onChange} style={style}></input>
+           <input type="text" className="form-control" name="search-bar" placeholder="twitch.tv/" value={this.state.stream} onChange={this._onChange} style={style}></input>
            <span className="input-group-btn">
-             <button className="btn btn-secondary" type="submit" onClick={this.onPress} style={style}>Go!</button>
+             <button className="btn btn-secondary" type="submit" onClick={this._onClick} style={style}>go</button>
            </span>
          </div>
        </div>
@@ -29,6 +29,9 @@ const Searchbar = React.createClass({
   },
   _onChange: function onSearchChange(event) {
     this.setState({ stream: event.target.value });
+  },
+  _onClick: function onClick() {
+    PlayerActions.getStream(this.state.stream);
   }
 });
 

@@ -27,8 +27,11 @@
     "npm-run-all": "^1.4.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
+    "react-redux": "^4.0.6",
     "react-router": "^1.0.3",
     "reactify": "^1.1.1",
+    "redux": "^3.0.5",
+    "redux-devtools": "^3.0.1",
     "request": "^2.67.0",
     "request-promise": "^1.0.2",
     "watchify": "^3.6.1"
