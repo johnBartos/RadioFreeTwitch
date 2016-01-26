@@ -1,5 +1,7 @@
 :construction::construction: UNDER CONSTRUCTION :construction::construction::construction:
 
+![https://i.imgur.com/p1LcIqj.jpg](streamrad.io)
+
 #What is this?
 RFT is a website that splits the audio from Twitch streams and serves it up to you. It's kind of like a radio.
 
