@@ -5,7 +5,7 @@ module.exports = {
   entry: './client/js/root.js',
   output: { path: __dirname, filename: './client/bundle.js' },
   module: {
-    noParse: /\validate.js6$/,
+    noParse: /node_modules\/request-promise\/node_modules\/request\/node_modules\/http-signature\/node_modules\/jsprim\/node_modules\/json-schema\/lib\/validate\.js/,
     loaders: [
       {
         test: /.jsx?$/,
