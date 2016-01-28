@@ -1,4 +1,4 @@
-import rp from 'request-promise';
+import fetch from 'whatwg-fetch';
 
 const getStream = (streamName) => {
   console.log('getting')
