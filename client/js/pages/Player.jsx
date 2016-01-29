@@ -1,20 +1,43 @@
-const React = require('react');
+import React from 'react';
+import ReactDom from 'react-dom';
 const PropTypes = React.PropTypes;
 
-const App = React.createClass({
-  propTypes: {
-    children: PropTypes.object
-  },
+function buildClip(manifestUri) {
+  return {
+    sources: [
+      {
+        type: 'application/xmpegurl',
+        src: manifestUri
+      }
+    ]
+  };
+}
 
-  render: function renderApp() {
+function createPlayer(container, manifestUri) {
+  return flowplayer(container, {
+    autoplay: true,
+    clip: buildClip(manifestUri)
+  });
+}
+
+const style = {
+  width: '200px',
+  height: '200px'
+};
+
+const Player = React.createClass({
+  propTypes: {
+  },
+  componentDidMount() {
+    const player = createPlayer(ReactDom.findDOMNode(this), this.props.manifestUri);
+    console.log(player);
+    this.setState({ player });
+  },
+  render() {
     return (
-      <section className="App">
-        <div className="container main">
-          <h1 className="text-xs-center">HELLO CRUEL WORLD</h1>
-        {this.props.children}
-      </section>
+      <div className="player-container" style={style}>AAAAAAAAAAA</div>
     );
   }
 });
 
-module.exports = App;
+module.exports = Player;
