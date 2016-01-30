@@ -1,4 +1,4 @@
-const React = require('react');
+import React, { Component } from 'react';
 
 const headerStyle = {
   borderRadius: '0',
@@ -7,8 +7,8 @@ const headerStyle = {
   padding: '0'
 };
 
-const Header = React.createClass({
-  render: function renderNavbar() {
+class Header extends Component {
+  render() {
     return (
       <div className="container-fluid" style={headerStyle}>
         <div className="col-xs-2">
@@ -20,6 +20,6 @@ const Header = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = Header;
+export default Header;

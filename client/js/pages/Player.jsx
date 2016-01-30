@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom';
-const PropTypes = React.PropTypes;
 
-function buildClip(manifestUri) {
+function buildClip(stream) {
   return {
     sources: [
       {
-        type: 'application/xmpegurl',
-        src: manifestUri
+        type: 'application/x-mpegurl',
+        src: stream
       }
     ]
   };
@@ -16,38 +15,51 @@ function buildClip(manifestUri) {
 function createPlayer(container, manifestUri) {
   return flowplayer(container, {
     autoplay: true,
-    clip: buildClip(manifestUri)
+    clip: buildClip(manifestUri),
+    debug: true
   });
 }
 
 const style = {
-  width: '200px',
-  height: '200px'
+  width: '0',
+  height: '0',
+  visibility: 'hidden'
 };
 
-const Player = React.createClass({
-  propTypes: {
+class Player extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  static propTypes = {
     params: PropTypes.object.isRequired
-  },
+  };
+
   componentWillMount() {
     fetch('/api/audio-stream/' + this.props.params.stream)
-    .then(result => {
-      console.log(result);
+    .then(response => {
+      response.text().then(data => {
+        this.setState({ stream: data });
+      });
     })
     .catch(reason => {
       console.log(reason);
     });
-  },
-  componentDidMount() {
-    const player = createPlayer(ReactDom.findDOMNode(this), this.props.manifestUri);
-    console.log(player);
-    this.setState({ player });
-  },
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    if (!this.state.player && this.state.stream) {
+      const player = createPlayer(ReactDom.findDOMNode(this), this.state.stream);
+      console.log(player);
+      this.setState({ player });
+    }
+  }
+
   render() {
     return (
-      <div className="player-container" style={style}>AAAAAAAAAAA</div>
+      <div className="player-container stream fixed-controls" id="player" style={style}></div>
     );
   }
-});
+}
 
-module.exports = Player;
+export default Player;

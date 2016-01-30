@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react';
-import Router from 'react-router';
+import React, { Component } from 'react';
 
 const style = {
   color: '#4183D7',
@@ -8,7 +7,7 @@ const style = {
 
 class Searchbar extends Component {
   constructor(props, context) {
-     super(props, context);
+    super(props, context);
   }
 
   static contextTypes = {
@@ -24,9 +23,7 @@ class Searchbar extends Component {
   };
 
   _onClick = () => {
-    const stream = '/radio/' + this.state.stream;
-    console.log(this.context.router);
-    this.context.router.transitionTo(stream, {});
+    this.context.router.push('/radio/' + this.state.stream);
   };
 
   render() {
@@ -43,6 +40,6 @@ class Searchbar extends Component {
       </div>
     );
   }
-};
+}
 
-export default Searchbar
+export default Searchbar;
