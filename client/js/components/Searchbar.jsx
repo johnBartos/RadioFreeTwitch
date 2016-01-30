@@ -1,19 +1,35 @@
-const React = require('react');
-const PlayerActions = require('../actions/PlayerActions');
-const ReactPropTypes = React.PropTypes;
+import React, { Component, PropTypes } from 'react';
+import Router from 'react-router';
 
 const style = {
   color: '#4183D7',
   border: '1px solid black'
 };
 
-const Searchbar = React.createClass({
-  getInitialState: () => {
-    return {
-      stream: ''
-    };
-  },
-  render: function renderSearchbar() {
+class Searchbar extends Component {
+  constructor(props, context) {
+     super(props, context);
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
+  state = {
+    stream: ''
+  };
+
+  _onChange = (event) => {
+    this.setState({ stream: event.target.value });
+  };
+
+  _onClick = () => {
+    const stream = '/radio/' + this.state.stream;
+    console.log(this.context.router);
+    this.context.router.transitionTo(stream, {});
+  };
+
+  render() {
     return (
       <div className="row search-bar">
         <div className="col-xs-offset-3 col-xs-6">
@@ -26,13 +42,7 @@ const Searchbar = React.createClass({
        </div>
       </div>
     );
-  },
-  _onChange: function onSearchChange(event) {
-    this.setState({ stream: event.target.value });
-  },
-  _onClick: function onClick() {
-    PlayerActions.getStream(this.state.stream);
   }
-});
+};
 
-module.exports = Searchbar;
+export default Searchbar

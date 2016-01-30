@@ -7,6 +7,8 @@ const getStream = (streamName) => {
   //   method: 'GET',
   //   headers: { 'user-agent': 'stream-radio' }
   // });
+
+  return fetch('/api/audio-stream/' + streamName);
 };
 
 module.exports = {

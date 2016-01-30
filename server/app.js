@@ -7,5 +7,5 @@ app.use('*/node_modules/bootstrap', express.static(path.join(__dirname, '/..', '
 
 require('./routes.js')(app);
 
-app.listen(4000);
-console.log('Listening on port 4000');
+app.listen(8080);
+console.log('Listening on port 8080');

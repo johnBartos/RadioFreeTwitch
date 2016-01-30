@@ -27,6 +27,16 @@ const style = {
 
 const Player = React.createClass({
   propTypes: {
+    params: PropTypes.object.isRequired
+  },
+  componentWillMount() {
+    fetch('/api/audio-stream/' + this.props.params.stream)
+    .then(result => {
+      console.log(result);
+    })
+    .catch(reason => {
+      console.log(reason);
+    });
   },
   componentDidMount() {
     const player = createPlayer(ReactDom.findDOMNode(this), this.props.manifestUri);

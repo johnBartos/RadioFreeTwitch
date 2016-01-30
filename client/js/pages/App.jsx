@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Header from '../components/Header.jsx';
 import Searchbar from '../components/Searchbar.jsx';
 import { Link } from 'react-router';
-const PropTypes = React.PropTypes;
 
-const App = React.createClass({
-  propTypes: {
+class App extends Component {
+  constructor(props, context) {
+    console.log(context);
+     super(props, context);
+  }
+
+  static propTypes = {
     children: PropTypes.object
-  },
+  };
 
-  render: function renderApp() {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
+  render() {
     return (
       <section className="App">
         <Header
@@ -22,6 +30,6 @@ const App = React.createClass({
       </section>
     );
   }
-});
+};
 
-module.exports = App;
+export default App
