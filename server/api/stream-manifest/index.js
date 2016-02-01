@@ -1,6 +1,6 @@
 'use strict';
 
-const controller = require('./stream-chunks.controller.js');
+const controller = require('./stream-manifest.controller.js');
 const router = require('express').Router();
 
 router.get('/:stream', controller.getStreamManifest);

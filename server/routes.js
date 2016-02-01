@@ -3,7 +3,7 @@ const path = require('path');
 
 const routes = (app) => {
   app.use('*/api/audio-stream', require('./api/audio-stream'));
-  app.use('*/api/stream-chunks', require('./api/stream-chunks'));
+  app.use('*/api/stream-manifest', require('./api/stream-manifest'));
   app.use('*/api/chunk-proxy', require('./api/chunk-proxy'));
 
   app.route('/crossdomain.xml')

@@ -6,7 +6,7 @@ const accessTokenController = require('./access-token.controller.js');
 const options = (name, accessToken) => {
   const getStreamUri = (body) => {
     const lines = body.split('\n');
-    return 'api/stream-chunks/' + encodeURIComponent(lines[lines.length - 2]);
+    return 'api/stream-manifest/' + encodeURIComponent(lines[lines.length - 2]);
   };
 
   return {
